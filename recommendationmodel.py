@@ -3,7 +3,7 @@ import utils.authorization as auth
 import numpy as np
 from numpy.linalg import norm
 
-df = pd.read_csv("D:/repos/obot/datasets/SpotifyFeatures.csv")
+df = pd.read_csv("/mnt/d/repos/whoebot/datasets/SpotifyFeatures.csv")
 
 df["mood_vec"] = df[["valence", "energy"]].values.tolist()
 df["mood_vec"].head()
@@ -19,4 +19,7 @@ def recommend(track_id, ref_df, sp, n_recs=5):
     ref_df_sorted = ref_df.sort_values(by="distances", ascending=True)
     ref_df_sorted = ref_df_sorted[ref_df_sorted["id"] != track_id]
 
-    return ref_df_sorted.iloc[:n_recs]
+    ans=ref_df_sorted.iloc[:n_recs]
+    
+    return ans 
+    

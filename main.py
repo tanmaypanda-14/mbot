@@ -1,7 +1,7 @@
 import discord
 import os
 # from json import loads
-from recommendationmodel import *
+from ss import *
 from utils.bb import *
 from dotenv import load_dotenv
 
@@ -32,6 +32,6 @@ async def on_message(message):
         await message.channel.send(song5.title)
     if msg.startswith('$recommend'):
         track1 = msg.split("$recommend ", 1)[1]
-        await message.channel.send(recommend(track_id=track1, ref_df=df, sp=sp, n_recs=5))
+        await message.channel.send(suggestion_system_func(track1))
 
 client.run(TOKEN)

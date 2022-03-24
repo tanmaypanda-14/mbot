@@ -47,13 +47,10 @@ async def on_message(message):
             await message.channel.send(str(i + 1) + "." + Song_info['items'][i]['name'] + " by " + Song_info['items'][i]['artists'][0]['name'])
 
         await message.channel.send('Enter Song no.')
-        mesg = await client.wait_for("message",check = lambda message: message.author == message.author
-                                      and message.channel == message.channel)
-
+        mesg = await client.wait_for("message",check = lambda message: message.author == message.author and message.channel == message.channel)
         if mesg:
             choice = mesg.content
             choice_con=int(choice)
-            print(choice)
             print(choice_con)
         ch_id = Song_info['items'][choice_con - 1]['id']
         

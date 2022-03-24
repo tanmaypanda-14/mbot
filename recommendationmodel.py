@@ -8,9 +8,6 @@ df = pd.read_csv("/mnt/d/repos/whoebot/datasets/SpotifyFeatures.csv")
 df["mood_vec"] = df[["valence", "energy"]].values.tolist()
 df["mood_vec"].head()
 
-sp = auth.authorize()
-
-
 def recommend(track_id, ref_df, sp, n_recs=5):
     track_features = sp.track_audio_features(track_id)
     track_moodvec = np.array([track_features.valence, track_features.energy])
@@ -20,6 +17,9 @@ def recommend(track_id, ref_df, sp, n_recs=5):
     ref_df_sorted = ref_df_sorted[ref_df_sorted["id"] != track_id]
 
     ans=ref_df_sorted.iloc[:n_recs]
-    
-    return ans 
-    
+    return_df = [list(row)[2] for row in ans[:5].values]
+    temp = {'track_name':return_df}
+    index_labels=['a)','b)','c)','d)','e)']
+    return_ans = pd.DataFrame(temp,index=index_labels)
+
+    return return_ans 
